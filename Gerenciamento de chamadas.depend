@@ -1,0 +1,36 @@
+# depslib dependency file v1.0
+1683500464 source:c:\users\gutom\onedrive\햞ea de trabalho\augusto\faculdade\2 periodo\estrutura de dados\atv avaliativas\gerenciamento de chamadas\gerenciador.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<math.h>
+	<time.h>
+	<locale.h>
+	"gerenciador.h"
+
+1683500471 c:\users\gutom\onedrive\햞ea de trabalho\augusto\faculdade\2 periodo\estrutura de dados\atv avaliativas\gerenciamento de chamadas\gerenciador.h
+
+1683517194 source:c:\users\gutom\onedrive\햞ea de trabalho\augusto\faculdade\2 periodo\estrutura de dados\atv avaliativas\gerenciamento de chamadas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<math.h>
+	<time.h>
+	<locale.h>
+	"gerenciador.h"
+	"fila.h"
+
+1683520075 source:c:\users\gutom\onedrive\햞ea de trabalho\augusto\faculdade\2 periodo\estrutura de dados\atv avaliativas\gerenciamento de chamadas\fila.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<math.h>
+	<time.h>
+	<locale.h>
+	"fila.h"
+
+1683517058 c:\users\gutom\onedrive\햞ea de trabalho\augusto\faculdade\2 periodo\estrutura de dados\atv avaliativas\gerenciamento de chamadas\fila.h
+

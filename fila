@@ -1,0 +1,134 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "gerenciador.h"
+
+void createfila(fila *f){
+  f->inicio =NULL;
+  f->fim    =NULL;
+}
+
+
+int fila_vazia(fila *f){
+
+  if(f->inicio==NULL){
+    return 1; // FILA VAZIA
+  }else{
+    return 0; // FILA NAO VAZIA
+  }
+}
+
+
+void insere_fila(fila *f,int numero, int aplicacao, int prioridade, char *cod_sql){
+
+  transacoes *novo= malloc(sizeof(transacoes));
+  novo->numero = numero;
+  novo->cod_aplicacao = aplicacao;
+  novo->cod_prioridade = prioridade;
+  strcpy(novo->cod_sql, cod_sql);
+  novo->prox = NULL;
+
+
+  if(fila_vazia(f)==1)
+    {
+        f->inicio = novo;
+        f->fim = novo;
+  }
+  else
+    {
+        if (prioridade == 2)
+        {
+            if(f->inicio->cod_prioridade == 1 || numero < f->inicio->numero)
+            {
+               novo->prox = f->inicio;
+               f->inicio = novo;
+            }
+            else
+            {
+                transacoes *aux = f->inicio;
+                while(aux->prox != NULL && aux->prox->numero < numero && aux->prox->cod_prioridade != 1)
+                {
+                    aux = aux->prox;
+                }
+                novo->prox = aux->prox;
+                aux->prox = novo;
+            }
+        }
+        else
+        {
+            if(numero > f->fim->numero)
+            {
+                f->fim->prox = novo;
+                f->fim = novo;
+            }
+            else if(f->inicio->cod_prioridade == 1 && numero < f->inicio->numero)
+            {
+                novo->prox = f->inicio;
+                f->inicio = novo;
+            }
+            else
+            {
+
+                transacoes *aux = f->inicio;
+                while(aux->prox != NULL && aux->prox->cod_prioridade == 2 || aux->prox != NULL && aux->prox->numero < numero)
+                {
+                    aux = aux->prox;
+                }
+                novo->prox = aux->prox;
+                aux->prox = novo;
+
+            }
+        }
+    }
+
+    novo=NULL;
+    free(novo);
+}
+
+
+void remove_fila(fila *f, fila *salvar)
+{
+    while(!fila_vazia(f))
+    {
+        transacoes *aux=malloc(sizeof(transacoes));
+
+        aux=f->inicio;
+
+        f->inicio = aux->prox;
+
+
+        aux->prox = NULL;
+
+        insere_fila(salvar, aux->numero, aux->cod_aplicacao, aux->cod_prioridade, aux->cod_sql);
+
+        if(f->inicio==NULL)
+        {
+            f->fim=NULL;
+            free(aux);
+        }
+        else
+        {
+           free(aux);
+        }
+    }
+}
+
+
+void mostrar_fila(fila *f)
+{
+
+    transacoes *aux=malloc(sizeof(transacoes));
+
+    aux = f->inicio;
+
+    while(aux!= NULL)
+    {
+        printf("\n\n\t Aplicacao %d",aux->cod_aplicacao);
+        printf("\n\n Prioridade %d",aux->cod_prioridade);
+        printf("\n Ordem: %d",aux->numero);
+        printf("\n Comando: %s",aux->cod_sql);
+        aux=aux->prox;
+    }
+   free(aux);
+
+}
